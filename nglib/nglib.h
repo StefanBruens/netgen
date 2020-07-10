@@ -471,6 +471,8 @@ DLL_HEADER void Ng_RestrictMeshSizeBox (Ng_Mesh * mesh, double * pmin, double * 
                       found in the description of #Ng_Result
 */
 DLL_HEADER Ng_Result Ng_GenerateVolumeMesh (Ng_Mesh * mesh, Ng_Meshing_Parameters * mp);
+DLL_HEADER Ng_Result Ng_GenerateVolumeMesh (Ng_Mesh * mesh, double maxh);
+DLL_HEADER Ng_Result Ng_OptimizeVolumeMesh(Ng_Mesh *mesh, double maxh);
 
 // ------------------------------------------------------------------
 

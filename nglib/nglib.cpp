@@ -389,6 +389,48 @@ namespace nglib
       return NG_OK;
    }
 
+  // Generates volume mesh from an existing surface mesh
+  DLL_HEADER Ng_Result Ng_GenerateVolumeMesh (Ng_Mesh * mesh, double maxh)
+  {
+    Mesh *m = (Mesh*)mesh;
+
+    MeshingParameters mparam;
+    mparam.uselocalh = 1;
+    mparam.maxh = maxh;
+
+    try{
+      m->CalcLocalH(mparam.grading);
+      MeshVolume(mparam, *m);
+      //RemoveIllegalElements(*m);
+      //OptimizeVolume(mparam, *m);
+    }
+    catch(netgen::NgException error){
+      return NG_VOLUME_FAILURE;
+    }
+    return NG_OK;
+  }
+
+  // optimizes an existing 3D mesh
+  DLL_HEADER Ng_Result Ng_OptimizeVolumeMesh(Ng_Mesh *mesh, double maxh)
+  {
+    Mesh *m = (Mesh*)mesh;
+
+    MeshingParameters mparam;
+    mparam.uselocalh = 1;
+    mparam.maxh = maxh;
+
+    try{
+      m->CalcLocalH(mparam.grading);
+      //MeshVolume(mparam, *m);
+      RemoveIllegalElements(*m);
+      OptimizeVolume(mparam, *m);
+    }
+    catch(netgen::NgException error){
+      return NG_VOLUME_FAILURE;
+    }
+    return NG_OK;
+  }
+
 
 
 
