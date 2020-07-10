@@ -11,7 +11,7 @@ endif(USE_GUI)
 
 target_link_libraries(occ PUBLIC ngcore PRIVATE netgen_python)
 
-if(NOT WIN32)
+if(NOT NG_ONELIB)
     target_link_libraries( occ PRIVATE ${OCC_LIBRARIES} )
     if(USE_OCC AND APPLE)
         # Link AppKit in case OCE was built as static libraries
@@ -23,7 +23,7 @@ if(NOT WIN32)
         target_link_libraries( occvis PUBLIC occ )
         install( TARGETS occvis ${NG_INSTALL_DIR})
     endif(USE_GUI)
-endif(NOT WIN32)
+endif(NOT NG_ONELIB)
 
 install(FILES
   occgeom.hpp occmeshsurf.hpp vsocc.hpp

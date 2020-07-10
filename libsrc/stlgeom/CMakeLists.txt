@@ -3,20 +3,20 @@ add_library(stl ${NG_LIB_TYPE}
         stlgeommesh.cpp stlline.cpp stltool.cpp stltopology.cpp python_stl.cpp
         )
 
-if(NOT WIN32)
+if(NOT NG_ONELIB)
     target_link_libraries( stl PUBLIC mesh )
     install( TARGETS stl ${NG_INSTALL_DIR})
-endif(NOT WIN32)
+endif(NOT NG_ONELIB)
 
 target_link_libraries( stl PUBLIC ngcore PRIVATE netgen_python )
 
 if(USE_GUI)
     add_library(stlvis ${NG_LIB_TYPE} vsstl.cpp)
     target_link_libraries(stlvis PRIVATE netgen_python PUBLIC ngcore)
-    if(NOT WIN32)
+    if(NOT NG_ONELIB)
         target_link_libraries( stlvis PUBLIC stl )
         install( TARGETS stlvis ${NG_INSTALL_DIR})
-    endif(NOT WIN32)
+    endif(NOT NG_ONELIB)
 endif(USE_GUI)
 
 install(FILES

@@ -12,22 +12,22 @@ if(APPLE)
 endif(APPLE)
 
 target_link_libraries(csg PUBLIC mesh PRIVATE netgen_python)
-if(NOT WIN32)
+if(NOT NG_ONELIB)
   install( TARGETS csg ${NG_INSTALL_DIR})
-endif(NOT WIN32)
+endif(NOT NG_ONELIB)
 
 target_link_libraries(csg PUBLIC ngcore)
 
 if(USE_GUI)
     add_library(csgvis ${NG_LIB_TYPE} vscsg.cpp )
     target_link_libraries(csgvis PRIVATE netgen_python PUBLIC ngcore)
-    if(NOT WIN32)
+    if(NOT NG_ONELIB)
         target_link_libraries(csgvis PUBLIC csg visual)
         if(APPLE)
             set_target_properties( csgvis PROPERTIES SUFFIX ".so")
         endif(APPLE)
         install( TARGETS csgvis ${NG_INSTALL_DIR})
-    endif(NOT WIN32)
+    endif(NOT NG_ONELIB)
 endif(USE_GUI)
 
 install(FILES

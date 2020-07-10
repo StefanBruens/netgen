@@ -5,17 +5,17 @@ if(APPLE)
 endif(APPLE)
 
 target_link_libraries(geom2d PUBLIC ngcore mesh PRIVATE netgen_python)
-if(NOT WIN32)
+if(NOT NG_ONELIB)
   install( TARGETS geom2d ${NG_INSTALL_DIR})
-endif(NOT WIN32)
+endif(NOT NG_ONELIB)
 
 if(USE_GUI)
     add_library(geom2dvis ${NG_LIB_TYPE} vsgeom2d.cpp)
     target_link_libraries(geom2dvis PUBLIC ngcore)
-    if(NOT WIN32)
+    if(NOT NG_ONELIB)
         target_link_libraries(geom2dvis PUBLIC geom2d)
         install( TARGETS geom2dvis ${NG_INSTALL_DIR})
-    endif(NOT WIN32)
+    endif(NOT NG_ONELIB)
 endif(USE_GUI)
 
 install(FILES

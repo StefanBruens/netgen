@@ -9,8 +9,11 @@ endif(USE_GUI)
 
 add_library(visual ${NG_LIB_TYPE} ${LIB_VISUAL_SOURCES})
 
-target_link_libraries( visual PUBLIC ngcore PRIVATE netgen_python ${MPI_CXX_LIBRARIES} ${OPENGL_LIBRARIES} )
+target_link_libraries( visual PRIVATE netgen_python ${MPI_CXX_LIBRARIES} ${OPENGL_LIBRARIES} )
 install( TARGETS visual ${NG_INSTALL_DIR})
+if(NOT NG_ONELIB)
+  target_link_libraries( visual PUBLIC ngcore )
+endif(NOT NG_ONELIB)
 
 install(FILES
   meshdoc.hpp mvdraw.hpp

@@ -1,5 +1,5 @@
 
-add_library(ngcore SHARED
+add_library(ngcore ${NG_LIB_TYPE}
   archive.cpp
   bitarray.cpp
   exception.cpp
@@ -57,7 +57,9 @@ if(USE_NUMA)
     target_link_libraries(ngcore PRIVATE ${NUMA_LIBRARY})
 endif(USE_NUMA)
 
-install(TARGETS ngcore DESTINATION ${NG_INSTALL_DIR} COMPONENT netgen)
+if(NOT NG_ONELIB)
+  install(TARGETS ngcore DESTINATION ${NG_INSTALL_DIR} COMPONENT netgen)
+endif(NOT NG_ONELIB)
 
 target_link_libraries(ngcore PUBLIC netgen_mpi PRIVATE netgen_python ${CMAKE_THREAD_LIBS_INIT})
 

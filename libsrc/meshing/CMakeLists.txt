@@ -24,9 +24,9 @@ endif(APPLE)
 target_link_libraries( mesh PUBLIC ngcore PRIVATE gprim la gen )
 
 target_link_libraries( mesh PRIVATE netgen_metis netgen_python ${ZLIB_LIBRARIES} )
-if(NOT WIN32)
+if(NOT NG_ONELIB)
   install( TARGETS mesh ${NG_INSTALL_DIR})
-endif(NOT WIN32)
+endif(NOT NG_ONELIB)
 
 install(FILES
   adfront2.hpp adfront3.hpp basegeom.hpp bcfunctions.hpp bisect.hpp

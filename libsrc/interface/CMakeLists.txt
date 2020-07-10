@@ -9,9 +9,9 @@ add_library(interface ${NG_LIB_TYPE}
 
 target_link_libraries(interface PUBLIC mesh csg geom2d stl visual PRIVATE netgen_cgns)
 
-if(NOT WIN32)
+if(NOT NG_ONELIB)
   install( TARGETS interface ${NG_INSTALL_DIR})
-endif(NOT WIN32)
+endif(NOT NG_ONELIB)
 
 install(FILES
   writeuser.hpp
