@@ -271,33 +271,6 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/meshing/meshtype.hpp netgen-5.3.1_SRC_mo
  
  
    enum ELEMENT_TYPE { 
-@@ -360,7 +361,7 @@
-         {
- #ifdef DEBUG
-           if (typ != QUAD && typ != QUAD6 && typ != QUAD8)
--            PrintSysError ("element2d::GetNV not implemented for typ", typ)
-+            PrintSysError ("element2d::GetNV not implemented for typ", typ);
- #endif
-           return 4;
-         }
-@@ -618,7 +619,7 @@
- 	  return 8;
- 	default:
- #ifdef DEBUG
--	  PrintSysError ("Element3d::GetNV not implemented for typ ", typ)
-+	  PrintSysError ("Element3d::GetNV not implemented for typ ", typ);
- #endif
- 	    ;
- 	}
-@@ -682,7 +683,7 @@
- 	case PRISM12: return 5;
- 	default:
- #ifdef DEBUG
--	  PrintSysError ("element3d::GetNFaces not implemented for typ", typ)
-+	  PrintSysError ("element3d::GetNFaces not implemented for typ", typ);
- #endif
- 	    ;
- 	}
 diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Makefile.am netgen-5.3.1_SRC_modif/libsrc/occ/Makefile.am
 --- netgen-5.3.1_SRC_orig/libsrc/occ/Makefile.am	2014-08-29 13:54:03.000000000 +0400
 +++ netgen-5.3.1_SRC_modif/libsrc/occ/Makefile.am	2017-09-11 18:08:21.234311865 +0300
