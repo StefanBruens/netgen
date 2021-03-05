@@ -260,17 +260,6 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/meshing/meshtype.cpp netgen-5.3.1_SRC_mo
            err += 1e12;
          else
            {
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/meshing/meshtype.hpp netgen-5.3.1_SRC_modif/libsrc/meshing/meshtype.hpp
---- netgen-5.3.1_SRC_orig/libsrc/meshing/meshtype.hpp	2014-08-29 13:54:05.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/meshing/meshtype.hpp	2017-09-11 18:08:21.228312514 +0300
-@@ -15,6 +15,7 @@
-     Classes for NETGEN
-   */
- 
-+class Mesh; // added due to compilation errors on some platforms
- 
- 
-   enum ELEMENT_TYPE { 
 diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Makefile.am netgen-5.3.1_SRC_modif/libsrc/occ/Makefile.am
 --- netgen-5.3.1_SRC_orig/libsrc/occ/Makefile.am	2014-08-29 13:54:03.000000000 +0400
 +++ netgen-5.3.1_SRC_modif/libsrc/occ/Makefile.am	2017-09-11 18:08:21.234311865 +0300
