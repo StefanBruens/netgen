@@ -1187,17 +1187,6 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occmeshsurf.cpp netgen-5.3.1_SRC_mod
  
  
  
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/utilities.h netgen-5.3.1_SRC_modif/libsrc/occ/utilities.h
---- netgen-5.3.1_SRC_orig/libsrc/occ/utilities.h	2014-08-29 13:54:03.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/occ/utilities.h	2017-09-11 18:08:21.233311974 +0300
-@@ -33,6 +33,7 @@
- 
- #include <string>
- #include <iostream>
-+#include <iomanip>
- #include <cstdlib>
- // #include "SALOME_Log.hxx"
- 
 diff -Naur netgen-5.3.1_SRC_orig/libsrc/stlgeom/Makefile.am netgen-5.3.1_SRC_modif/libsrc/stlgeom/Makefile.am
 --- netgen-5.3.1_SRC_orig/libsrc/stlgeom/Makefile.am	2014-08-29 13:54:05.000000000 +0400
 +++ netgen-5.3.1_SRC_modif/libsrc/stlgeom/Makefile.am	2017-09-11 18:08:21.235311757 +0300
