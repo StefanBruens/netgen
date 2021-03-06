@@ -708,14 +708,14 @@ namespace netgen
     hnewp = Point<3> (pnt.X(), pnt.Y(), pnt.Z());
     newp = hnewp;
     newgi = ap1;
-  };
+  }
 
 
   void OCCRefinementSurfaces :: ProjectToSurface (Point<3> & p, int surfi) const
   {
     if (surfi > 0)
       geometry.Project (surfi, p);
-  };
+  }
 
   void OCCRefinementSurfaces :: ProjectToSurface (Point<3> & p, int surfi, PointGeomInfo & gi) const
   {
@@ -725,7 +725,7 @@ namespace netgen
 	  cout << "Fast projection to surface fails! Using OCC projection" << endl;
 	  geometry.Project (surfi, p);
 	}
-  };
+  }
 
 
 
