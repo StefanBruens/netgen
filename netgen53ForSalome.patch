@@ -1126,18 +1126,6 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
  
        return true;
     }
-@@ -1038,9 +1095,9 @@
-    {
-       cout << "writing stl..."; cout.flush();
-       StlAPI_Writer writer;
--      writer.RelativeMode() = Standard_False;
-+      //writer.RelativeMode() = Standard_False;
- 
--      writer.SetDeflection(0.02);
-+      //writer.SetDeflection(0.02);
-       writer.Write(shape,filename);
- 
-       cout << "done" << endl;
 @@ -1059,10 +1116,10 @@
        occgeo = new OCCGeometry;
  
