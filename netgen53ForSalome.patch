@@ -276,51 +276,6 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Makefile.am netgen-5.3.1_SRC_modif/l
  endif
  
  
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter3d.cxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter3d.cxx
---- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter3d.cxx	2014-08-29 13:54:03.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter3d.cxx	2017-09-11 18:08:21.229312406 +0300
-@@ -206,7 +205,7 @@
-   Handle (Geom_Surface) S   = BRep_Tool::Surface(F,L);
- 
-   if (S->IsKind(STANDARD_TYPE(Geom_RectangularTrimmedSurface))) {
--    S = (*(Handle_Geom_RectangularTrimmedSurface*)&S)->BasisSurface();
-+    S = Handle(Geom_RectangularTrimmedSurface)::DownCast (S)->BasisSurface();
-   }
-   if (!S->IsUPeriodic() && !S->IsVPeriodic())
-     return;
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter3d.hxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter3d.hxx
---- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter3d.hxx	2014-08-29 13:54:03.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter3d.hxx	2017-09-11 18:08:21.229312406 +0300
-@@ -83,13 +85,13 @@
-    void FacesPartition(const TopoDS_Face& F1,const TopoDS_Face& F2) ;
-    Standard_Boolean IsDone(const TopoDS_Face& F1,const TopoDS_Face& F2) const;
-    TopTools_MapOfShape& TouchedFaces() ;
--   Handle_BRepAlgo_AsDes AsDes() const;
-+   Handle(BRepAlgo_AsDes) AsDes() const;
-    TopTools_MapOfShape& NewEdges() ;
-    Standard_Boolean HasSameDomainF(const TopoDS_Shape& F) const;
-    Standard_Boolean IsSameDomainF(const TopoDS_Shape& F1,const TopoDS_Shape& F2) const;
-    const TopTools_ListOfShape& SameDomain(const TopoDS_Face& F) const;
-    TopoDS_Vertex ReplaceSameDomainV(const TopoDS_Vertex& V,const TopoDS_Edge& E) const;
--   Handle_BRepAlgo_AsDes SectionEdgesAD() const;
-+   Handle(BRepAlgo_AsDes) SectionEdgesAD() const;
-    Standard_Boolean IsSectionEdge(const TopoDS_Edge& E) const;
-    Standard_Boolean HasSectionEdge(const TopoDS_Face& F) const;
-    Standard_Boolean IsSplitOn(const TopoDS_Edge& NewE,const TopoDS_Edge& OldE,const TopoDS_Face& F) const;
-@@ -121,11 +123,11 @@
- 
-    // Fields PRIVATE
-    //
--   Handle_BRepAlgo_AsDes myAsDes;
-+   Handle(BRepAlgo_AsDes) myAsDes;
-    TopTools_DataMapOfShapeListOfShape myDone;
-    TopTools_MapOfShape myTouched;
-    TopTools_MapOfShape myNewEdges;
--   Handle_BRepAlgo_AsDes mySectionEdgesAD;
-+   Handle(BRepAlgo_AsDes) mySectionEdgesAD;
-    TopTools_DataMapOfShapeListOfShape mySameDomainFM;
-    TopTools_DataMapOfShapeShape mySameDomainVM;
- 
 diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop2d.cxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Loop2d.cxx
 --- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop2d.cxx	2014-08-29 13:54:03.000000000 +0400
 +++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Loop2d.cxx	2017-09-11 18:08:21.229312406 +0300
@@ -342,18 +297,6 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop2d.cxx netgen-5.3.1_SR
        {
          // an angle is too close to PI; assure that an angle sign really
          // reflects an edge position: +PI - an edge is worst,
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Spliter.hxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Spliter.hxx
---- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Spliter.hxx	2014-08-29 13:54:03.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Spliter.hxx	2017-09-11 18:08:21.231312190 +0300
-@@ -129,7 +125,7 @@
-    TopTools_DataMapOfShapeShape myFaceShapeMap;
-    TopTools_DataMapOfShapeShape myInternalFaces;
-    TopTools_DataMapOfShapeShape myIntNotClFaces;
--   Handle_BRepAlgo_AsDes myAsDes;
-+   Handle(BRepAlgo_AsDes) myAsDes;
-    BRepAlgo_Image myImagesFaces;
-    BRepAlgo_Image myImagesEdges;
-    BRepAlgo_Image myImageShape;
 diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occconstruction.cpp netgen-5.3.1_SRC_modif/libsrc/occ/occconstruction.cpp
 --- netgen-5.3.1_SRC_orig/libsrc/occ/occconstruction.cpp	2014-08-29 13:54:03.000000000 +0400
 +++ netgen-5.3.1_SRC_modif/libsrc/occ/occconstruction.cpp	2017-09-11 18:08:21.231312190 +0300
