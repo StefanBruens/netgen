@@ -297,18 +297,6 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop2d.cxx netgen-5.3.1_SR
        {
          // an angle is too close to PI; assure that an angle sign really
          // reflects an edge position: +PI - an edge is worst,
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occconstruction.cpp netgen-5.3.1_SRC_modif/libsrc/occ/occconstruction.cpp
---- netgen-5.3.1_SRC_orig/libsrc/occ/occconstruction.cpp	2014-08-29 13:54:03.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/occ/occconstruction.cpp	2017-09-11 18:08:21.231312190 +0300
-@@ -28,7 +28,7 @@
- #include <BRepAlgoAPI_Common.hxx>
- #include <BRepAlgoAPI_Fuse.hxx>
- #include <BRepAlgoAPI_Section.hxx>
--#include <BRepOffsetAPI_Sewing.hxx>
-+//#include <BRepOffsetAPI_Sewing.hxx>
- //#include <BRepAlgo_Sewing.hxx>
- #include <BRepOffsetAPI_MakeOffsetShape.hxx>
- #include <ShapeFix_Shape.hxx>
 diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgenmesh.cpp netgen-5.3.1_SRC_modif/libsrc/occ/occgenmesh.cpp
 --- netgen-5.3.1_SRC_orig/libsrc/occ/occgenmesh.cpp	2014-08-29 13:54:03.000000000 +0400
 +++ netgen-5.3.1_SRC_modif/libsrc/occ/occgenmesh.cpp	2017-09-11 18:08:21.231312190 +0300
