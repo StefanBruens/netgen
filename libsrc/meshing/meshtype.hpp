@@ -669,7 +669,7 @@ namespace netgen
     /// Calculates Volume of elemenet
     double Volume (const T_POINTS & points) const;
     ///
-    void Print (ostream & ost) const;
+    DLL_HEADER void Print (ostream & ost) const;
     ///
     int GetNFaces () const
     {
@@ -1300,7 +1300,7 @@ namespace netgen
     /// remove secondorder
     void SetMaxPointNr (int maxpnum);
 
-    void Print (ostream & ost) const;
+    DLL_HEADER void Print (ostream & ost) const;
   };
 
 

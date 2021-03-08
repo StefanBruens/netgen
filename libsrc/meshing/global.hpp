@@ -29,7 +29,7 @@ namespace netgen
 
   extern Array<int> tets_in_qualclass;
 
-  class multithreadt
+  class DLL_HEADER multithreadt
   {
   public:
     int pause;

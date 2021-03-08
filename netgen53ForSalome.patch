@@ -276,60 +276,9 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Makefile.am netgen-5.3.1_SRC_modif/l
  endif
  
  
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter2d.cxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter2d.cxx
---- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter2d.cxx	2014-08-29 13:54:03.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter2d.cxx	2017-09-11 18:08:21.228312514 +0300
-@@ -47,9 +47,7 @@
- #include <TopOpeBRep_EdgesIntersector.hxx>
- #include <TopOpeBRep_Point2d.hxx>
- #include <TopTools_ListIteratorOfListOfShape.hxx>
--#include <TopTools_ListOfShape.hxx>
- #include <TopTools_MapIteratorOfMapOfShape.hxx>
--#include <TopTools_MapOfShape.hxx>
- #include <TopoDS.hxx>
- #include <TopoDS_Edge.hxx>
- #include <TopoDS_Vertex.hxx>
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter2d.hxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter2d.hxx
---- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter2d.hxx	2014-08-29 13:54:03.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter2d.hxx	2017-09-11 18:08:21.228312514 +0300
-@@ -27,7 +27,9 @@
- #ifndef _Partition_Inter2d_HeaderFile
- #define _Partition_Inter2d_HeaderFile
- 
--#ifndef _Handle_BRepAlgo_AsDes_HeaderFile
-+#include <Standard_Version.hxx>
-+
-+#if OCC_VERSION_MAJOR < 7
- #include <Handle_BRepAlgo_AsDes.hxx>
- #endif
- #ifndef _Standard_Real_HeaderFile
-@@ -36,11 +38,13 @@
- #ifndef _Standard_Boolean_HeaderFile
- #include <Standard_Boolean.hxx>
- #endif
-+
-+#include <TopTools_MapOfShape.hxx>
-+#include <TopTools_ListOfShape.hxx>
-+
- class BRepAlgo_AsDes;
- class TopoDS_Face;
--class TopTools_MapOfShape;
- class TopoDS_Vertex;
--class TopTools_ListOfShape;
- class TopoDS_Edge;
- 
- 
 diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter3d.cxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter3d.cxx
 --- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter3d.cxx	2014-08-29 13:54:03.000000000 +0400
 +++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter3d.cxx	2017-09-11 18:08:21.229312406 +0300
-@@ -48,7 +48,6 @@
- #include <TopOpeBRepTool_BoxSort.hxx>
- #include <TopTools_DataMapIteratorOfDataMapOfShapeListOfShape.hxx>
- #include <TopTools_ListIteratorOfListOfShape.hxx>
--#include <TopTools_ListOfShape.hxx>
- #include <TopoDS.hxx>
- #include <TopoDS_Compound.hxx>
- #include <TopoDS_Edge.hxx>
 @@ -206,7 +205,7 @@
    Handle (Geom_Surface) S   = BRep_Tool::Surface(F,L);
  
@@ -342,38 +291,6 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter3d.cxx netgen-5.3.1_S
 diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter3d.hxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter3d.hxx
 --- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter3d.hxx	2014-08-29 13:54:03.000000000 +0400
 +++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Inter3d.hxx	2017-09-11 18:08:21.229312406 +0300
-@@ -27,7 +27,9 @@
- #ifndef _Partition_Inter3d_HeaderFile
- #define _Partition_Inter3d_HeaderFile
- 
--#ifndef _Handle_BRepAlgo_AsDes_HeaderFile
-+#include <Standard_Version.hxx>
-+
-+#if OCC_VERSION_MAJOR < 7
- #include <Handle_BRepAlgo_AsDes.hxx>
- #endif
- #ifndef _TopTools_DataMapOfShapeListOfShape_HeaderFile
-@@ -36,6 +38,9 @@
- #ifndef _TopTools_MapOfShape_HeaderFile
- #include <TopTools_MapOfShape.hxx>
- #endif
-+#ifndef _TopTools_ListOfShape_HeaderFile
-+#include <TopTools_ListOfShape.hxx>
-+#endif
- #ifndef _TopTools_DataMapOfShapeShape_HeaderFile
- #include <TopTools_DataMapOfShapeShape.hxx>
- #endif
-@@ -43,10 +48,7 @@
- #include <Standard_Boolean.hxx>
- #endif
- class BRepAlgo_AsDes;
--class TopTools_ListOfShape;
--class TopTools_DataMapOfShapeShape;
- class TopoDS_Face;
--class TopTools_MapOfShape;
- class TopoDS_Shape;
- class TopoDS_Vertex;
- class TopoDS_Edge;
 @@ -83,13 +85,13 @@
     void FacesPartition(const TopoDS_Face& F1,const TopoDS_Face& F2) ;
     Standard_Boolean IsDone(const TopoDS_Face& F1,const TopoDS_Face& F2) const;
@@ -404,18 +321,6 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Inter3d.hxx netgen-5.3.1_S
     TopTools_DataMapOfShapeListOfShape mySameDomainFM;
     TopTools_DataMapOfShapeShape mySameDomainVM;
  
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop.hxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Loop.hxx
---- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop.hxx	2014-08-29 13:54:03.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Loop.hxx	2017-09-11 18:08:21.229312406 +0300
-@@ -38,8 +38,6 @@
- #endif
- class TopoDS_Face;
- class TopoDS_Edge;
--class TopTools_ListOfShape;
--
- 
- #ifndef _Standard_HeaderFile
- #include <Standard.hxx>
 diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop2d.cxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Loop2d.cxx
 --- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop2d.cxx	2014-08-29 13:54:03.000000000 +0400
 +++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Loop2d.cxx	2017-09-11 18:08:21.229312406 +0300
@@ -437,71 +342,9 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop2d.cxx netgen-5.3.1_SR
        {
          // an angle is too close to PI; assure that an angle sign really
          // reflects an edge position: +PI - an edge is worst,
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop2d.hxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Loop2d.hxx
---- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop2d.hxx	2014-08-29 13:54:03.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Loop2d.hxx	2017-09-11 18:08:21.230312298 +0300
-@@ -24,7 +24,6 @@
- #endif
- class TopoDS_Face;
- class TopoDS_Edge;
--class TopTools_ListOfShape;
- class BRepAlgo_Image;
- 
- 
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop3d.hxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Loop3d.hxx
---- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Loop3d.hxx	2014-08-29 13:54:03.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Loop3d.hxx	2017-09-11 18:08:21.230312298 +0300
-@@ -13,6 +13,9 @@
- #ifndef _TopTools_ListOfShape_HeaderFile
- #include <TopTools_ListOfShape.hxx>
- #endif
-+#ifndef _TopTools_MapOfOrientedShape_HeaderFile
-+#include <TopTools_MapOfOrientedShape.hxx>
-+#endif
- #ifndef _TopTools_IndexedDataMapOfShapeListOfShape_HeaderFile
- #include <TopTools_IndexedDataMapOfShapeListOfShape.hxx>
- #endif
-@@ -23,8 +26,6 @@
- #include <Standard_Real.hxx>
- #endif
- class TopoDS_Shape;
--class TopTools_ListOfShape;
--class TopTools_MapOfOrientedShape;
- class TopoDS_Edge;
- class TopoDS_Face;
- class gp_Vec;
-diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Spliter.cxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Spliter.cxx
---- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Spliter.cxx	2014-08-29 13:54:03.000000000 +0400
-+++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Spliter.cxx	2017-09-11 18:08:21.230312298 +0300
-@@ -48,7 +48,6 @@
- #include <TopTools_IndexedDataMapOfShapeListOfShape.hxx>
- #include <TopTools_IndexedMapOfShape.hxx>
- #include <TopTools_ListIteratorOfListOfShape.hxx>
--#include <TopTools_ListOfShape.hxx>
- #include <TopTools_MapIteratorOfMapOfShape.hxx>
- #include <TopTools_SequenceOfShape.hxx>
- 
 diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Spliter.hxx netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Spliter.hxx
 --- netgen-5.3.1_SRC_orig/libsrc/occ/Partition_Spliter.hxx	2014-08-29 13:54:03.000000000 +0400
 +++ netgen-5.3.1_SRC_modif/libsrc/occ/Partition_Spliter.hxx	2017-09-11 18:08:21.231312190 +0300
-@@ -28,9 +28,6 @@
- #ifndef _TopTools_DataMapOfShapeShape_HeaderFile
- #include <TopTools_DataMapOfShapeShape.hxx>
- #endif
--#ifndef _Handle_BRepAlgo_AsDes_HeaderFile
--#include <Handle_BRepAlgo_AsDes.hxx>
--#endif
- #ifndef _BRepAlgo_Image_HeaderFile
- #include <BRepAlgo_Image.hxx>
- #endif
-@@ -45,7 +42,6 @@
- #endif
- class BRepAlgo_AsDes;
- class TopoDS_Shape;
--class TopTools_ListOfShape;
- class TopoDS_Edge;
- 
- 
 @@ -129,7 +125,7 @@
     TopTools_DataMapOfShapeShape myFaceShapeMap;
     TopTools_DataMapOfShapeShape myInternalFaces;
@@ -778,14 +621,11 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
  #include "ShapeAnalysis_Surface.hxx"
 +#include <BRepTopAdaptor_FClass2d.hxx> // -- to optimize Project() and FastProject()
 +#include <TopAbs_State.hxx>
- #include "BRepAlgoAPI_Fuse.hxx"
+ 
  #include "BRepCheck_Analyzer.hxx"
  #include "BRepLib.hxx"
-@@ -16,9 +18,16 @@
- #include "ShapeFix_FixSmallFace.hxx"
- #include "Partition_Spliter.hxx"
+@@ -29,6 +31,14 @@
  
--
  namespace netgen
  {
 +  // free data used to optimize Project() and FastProject()
@@ -799,7 +639,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
     void OCCGeometry :: PrintNrShapes ()
     {
        TopExp_Explorer e;
-@@ -112,13 +121,13 @@
+@@ -124,13 +133,13 @@
        double surfacecont = 0;
  
        {
@@ -815,7 +655,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
           }
           shape = rebuild->Apply(shape);
        }
-@@ -143,7 +152,7 @@
+@@ -155,7 +164,7 @@
           cout << endl << "- repairing faces" << endl;
  
           Handle(ShapeFix_Face) sff;
@@ -824,7 +664,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
           rebuild->Apply(shape);
  
  
-@@ -187,7 +196,7 @@
+@@ -199,7 +208,7 @@
                    cout << "(natural bounds added)" <<endl;
                 TopoDS_Face newface = sff->Face();
  
@@ -833,7 +673,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
              }
  
              // Set the original colour of the face to the newly created 
-@@ -200,13 +209,13 @@
+@@ -212,13 +221,13 @@
  
  
        {
@@ -849,7 +689,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
           }
           shape = rebuild->Apply(shape);
        }
-@@ -217,7 +226,7 @@
+@@ -229,7 +238,7 @@
           cout << endl << "- fixing small edges" << endl;
  
           Handle(ShapeFix_Wire) sfw;
@@ -858,7 +698,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
           rebuild->Apply(shape);
  
  
-@@ -270,7 +279,7 @@
+@@ -282,7 +291,7 @@
                 if(replace)
                 {
                    TopoDS_Wire newwire = sfw->Wire();
@@ -867,7 +707,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
                 }
  
                 //delete sfw; sfw = NULL;
-@@ -284,7 +293,7 @@
+@@ -296,7 +305,7 @@
  
           {
              BuildFMap();
@@ -876,7 +716,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
              rebuild->Apply(shape);
  
              for (exp1.Init (shape, TopAbs_EDGE); exp1.More(); exp1.Next())
-@@ -300,7 +309,7 @@
+@@ -312,7 +321,7 @@
                       cout << "removing degenerated edge " << emap.FindIndex(edge)
                          << " from vertex " << vmap.FindIndex(TopExp::FirstVertex (edge))
                          << " to vertex " << vmap.FindIndex(TopExp::LastVertex (edge)) << endl;
@@ -885,7 +725,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
                    }
                 }
              }
-@@ -312,13 +321,13 @@
+@@ -324,13 +333,13 @@
  
  
           {
@@ -901,7 +741,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
              }
              shape = rebuild->Apply(shape);
           }
-@@ -438,13 +447,13 @@
+@@ -450,13 +459,13 @@
  
  
        {
@@ -917,7 +757,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
           }
           shape = rebuild->Apply(shape);
        }
-@@ -483,9 +492,9 @@
+@@ -495,9 +504,9 @@
                    TopoDS_Solid solid = TopoDS::Solid(exp0.Current());
                    TopoDS_Solid newsolid = solid;
                    BRepLib::OrientClosedSolid (newsolid);
@@ -929,7 +769,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
                    TopoDS_Shape newshape = rebuild->Apply(shape, TopAbs_COMPSOLID);//, 1);
                    //		  TopoDS_Shape newshape = rebuild->Apply(shape);
                    shape = newshape;
-@@ -906,8 +915,8 @@
+@@ -918,8 +927,8 @@
              TopoDS_Solid solid = TopoDS::Solid(exp0.Current());
              TopoDS_Solid newsolid = solid;
              BRepLib::OrientClosedSolid (newsolid);
@@ -940,7 +780,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
  
              TopoDS_Shape newshape = rebuild->Apply(shape, TopAbs_SHAPE, 1);
              shape = newshape;
-@@ -951,25 +960,58 @@
+@@ -963,25 +972,58 @@
     }
  
  
@@ -1008,7 +848,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
     }
  
  
-@@ -979,54 +1021,69 @@
+@@ -991,54 +1033,69 @@
     {
        gp_Pnt p(ap(0), ap(1), ap(2));
  
@@ -1126,7 +966,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
  
        return true;
     }
-@@ -1059,10 +1116,10 @@
+@@ -1071,10 +1128,10 @@
        occgeo = new OCCGeometry;
  
        // Initiate a dummy XCAF Application to handle the IGES XCAF Document
@@ -1139,7 +979,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
  
        // Check if a IGES File is already open under this handle, if so, close it to prevent
        // Segmentation Faults when trying to create a new document
-@@ -1089,8 +1146,8 @@
+@@ -1101,8 +1158,8 @@
        reader.Transfer(iges_doc);
  
        // Read in the shape(s) and the colours present in the IGES File
@@ -1150,7 +990,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
  
        TDF_LabelSequence iges_shapes;
        iges_shape_contents->GetShapes(iges_shapes);
-@@ -1137,10 +1194,10 @@
+@@ -1149,10 +1206,10 @@
        occgeo = new OCCGeometry;
  
        // Initiate a dummy XCAF Application to handle the STEP XCAF Document
@@ -1163,7 +1003,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
  
        // Check if a STEP File is already open under this handle, if so, close it to prevent
        // Segmentation Faults when trying to create a new document
-@@ -1167,8 +1224,8 @@
+@@ -1179,8 +1236,8 @@
        reader.Transfer(step_doc);
  
        // Read in the shape(s) and the colours present in the STEP File
@@ -1174,7 +1014,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.cpp netgen-5.3.1_SRC_modif/l
  
        TDF_LabelSequence step_shapes;
        step_shape_contents->GetShapes(step_shapes);
-@@ -1221,7 +1278,7 @@
+@@ -1233,7 +1290,7 @@
        // Fixed a bug in the OpenCascade XDE Colour handling when 
        // opening BREP Files, since BREP Files have no colour data.
        // Hence, the face_colours Handle needs to be created as a NULL handle.
