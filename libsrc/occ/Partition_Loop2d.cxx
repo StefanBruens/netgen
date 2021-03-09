@@ -52,8 +52,6 @@
 #include <gp_Pnt.hxx>
 #include <gp_Pnt2d.hxx>
 
-#define PI 3.14159265358979323846
-
 //=======================================================================
 //function : Partition_Loop2d
 //purpose  :
@@ -212,7 +210,7 @@ static Standard_Boolean  SelectEdge(const BRepAdaptor_Surface& Surf,
     Cc->D1(uc, PC, CTg1);
     if (!isForward) CTg1.Reverse();
 
-    Standard_Real anglemin = 3 * PI, tolAng = 1.e-8;
+    Standard_Real anglemin = 3 * M_PI, tolAng = 1.e-8;
 
     // select an edge whose first derivative is most left of CTg1
     // ie an angle between Tg1 and CTg1 is least
@@ -236,7 +234,7 @@ static Standard_Boolean  SelectEdge(const BRepAdaptor_Surface& Surf,
       // -PI < angle < PI
       Standard_Real angle = Tg1.Angle(CTg1);
 
-      if (PI - Abs(angle) <= tolAng)
+      if (M_PI - Abs(angle) <= tolAng)
       {
         // an angle is too close to PI; assure that an angle sign really
         // reflects an edge position: +PI - an edge is worst,
