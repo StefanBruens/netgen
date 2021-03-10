@@ -203,7 +203,7 @@ namespace netgen
       // OpenCascade XDE Support
       // XCAF Handle to make the face colours available to the rest of
       // the system
-      Handle_XCAFDoc_ColorTool face_colours;
+      Handle(XCAFDoc_ColorTool) face_colours;
 
      mutable int changed;
       Array<int> facemeshstatus;

@@ -125,7 +125,7 @@ namespace netgen
       double surfacecont = 0;
 
       {
-         Handle_ShapeBuild_ReShape rebuild = new ShapeBuild_ReShape;
+         Handle(ShapeBuild_ReShape) rebuild = new ShapeBuild_ReShape;
          rebuild->Apply(shape);
          for (exp1.Init (shape, TopAbs_EDGE); exp1.More(); exp1.Next())
          {
@@ -156,7 +156,7 @@ namespace netgen
          cout << endl << "- repairing faces" << endl;
 
          Handle(ShapeFix_Face) sff;
-         Handle_ShapeBuild_ReShape rebuild = new ShapeBuild_ReShape;
+         Handle(ShapeBuild_ReShape) rebuild = new ShapeBuild_ReShape;
          rebuild->Apply(shape);
 
 
@@ -213,7 +213,7 @@ namespace netgen
 
 
       {
-         Handle_ShapeBuild_ReShape rebuild = new ShapeBuild_ReShape;
+         Handle(ShapeBuild_ReShape) rebuild = new ShapeBuild_ReShape;
          rebuild->Apply(shape);
          for (exp1.Init (shape, TopAbs_EDGE); exp1.More(); exp1.Next())
          {
@@ -230,7 +230,7 @@ namespace netgen
          cout << endl << "- fixing small edges" << endl;
 
          Handle(ShapeFix_Wire) sfw;
-         Handle_ShapeBuild_ReShape rebuild = new ShapeBuild_ReShape;
+         Handle(ShapeBuild_ReShape) rebuild = new ShapeBuild_ReShape;
          rebuild->Apply(shape);
 
 
@@ -297,7 +297,7 @@ namespace netgen
 
          {
             BuildFMap();
-            Handle_ShapeBuild_ReShape rebuild = new ShapeBuild_ReShape;
+            Handle(ShapeBuild_ReShape) rebuild = new ShapeBuild_ReShape;
             rebuild->Apply(shape);
 
             for (exp1.Init (shape, TopAbs_EDGE); exp1.More(); exp1.Next())
@@ -325,7 +325,7 @@ namespace netgen
 
 
          {
-            Handle_ShapeBuild_ReShape rebuild = new ShapeBuild_ReShape;
+            Handle9ShapeBuild_ReShape) rebuild = new ShapeBuild_ReShape;
             rebuild->Apply(shape);
             for (exp1.Init (shape, TopAbs_EDGE); exp1.More(); exp1.Next())
             {
@@ -451,7 +451,7 @@ namespace netgen
 
 
       {
-         Handle_ShapeBuild_ReShape rebuild = new ShapeBuild_ReShape;
+         Handle(ShapeBuild_ReShape) rebuild = new ShapeBuild_ReShape;
          rebuild->Apply(shape);
          for (exp1.Init (shape, TopAbs_EDGE); exp1.More(); exp1.Next())
          {
@@ -496,7 +496,7 @@ namespace netgen
                   TopoDS_Solid solid = TopoDS::Solid(exp0.Current());
                   TopoDS_Solid newsolid = solid;
                   BRepLib::OrientClosedSolid (newsolid);
-                  Handle_ShapeBuild_ReShape rebuild = new ShapeBuild_ReShape;
+                  Handle(ShapeBuild_ReShape) rebuild = new ShapeBuild_ReShape;
                   //		  rebuild->Apply(shape);
                   rebuild->Replace(solid, newsolid);
                   TopoDS_Shape newshape = rebuild->Apply(shape, TopAbs_COMPSOLID);//, 1);
@@ -919,7 +919,7 @@ namespace netgen
             TopoDS_Solid solid = TopoDS::Solid(exp0.Current());
             TopoDS_Solid newsolid = solid;
             BRepLib::OrientClosedSolid (newsolid);
-            Handle_ShapeBuild_ReShape rebuild = new ShapeBuild_ReShape;
+            Handle(ShapeBuild_ReShape) rebuild = new ShapeBuild_ReShape;
             rebuild->Replace(solid, newsolid);
 
             TopoDS_Shape newshape = rebuild->Apply(shape, TopAbs_SHAPE, 1);
@@ -1076,10 +1076,10 @@ namespace netgen
       occgeo = new OCCGeometry;
 
       // Initiate a dummy XCAF Application to handle the IGES XCAF Document
-      static Handle_XCAFApp_Application dummy_app = XCAFApp_Application::GetApplication();
+      static Handle(XCAFApp_Application) dummy_app = XCAFApp_Application::GetApplication();
 
       // Create an XCAF Document to contain the IGES file itself
-      Handle_TDocStd_Document iges_doc;
+      Handle(TDocStd_Document) iges_doc;
 
       // Check if a IGES File is already open under this handle, if so, close it to prevent
       // Segmentation Faults when trying to create a new document
@@ -1106,8 +1106,8 @@ namespace netgen
       reader.Transfer(iges_doc);
 
       // Read in the shape(s) and the colours present in the IGES File
-      Handle_XCAFDoc_ShapeTool iges_shape_contents = XCAFDoc_DocumentTool::ShapeTool(iges_doc->Main());
-      Handle_XCAFDoc_ColorTool iges_colour_contents = XCAFDoc_DocumentTool::ColorTool(iges_doc->Main());
+      Handle(XCAFDoc_ShapeTool) iges_shape_contents = XCAFDoc_DocumentTool::ShapeTool(iges_doc->Main());
+      Handle(XCAFDoc_ColorTool) iges_colour_contents = XCAFDoc_DocumentTool::ColorTool(iges_doc->Main());
 
       TDF_LabelSequence iges_shapes;
       iges_shape_contents->GetShapes(iges_shapes);
@@ -1154,10 +1154,10 @@ namespace netgen
       occgeo = new OCCGeometry;
 
       // Initiate a dummy XCAF Application to handle the STEP XCAF Document
-      static Handle_XCAFApp_Application dummy_app = XCAFApp_Application::GetApplication();
+      static Handle(XCAFApp_Application) dummy_app = XCAFApp_Application::GetApplication();
 
       // Create an XCAF Document to contain the STEP file itself
-      Handle_TDocStd_Document step_doc;
+      Handle(TDocStd_Document) step_doc;
 
       // Check if a STEP File is already open under this handle, if so, close it to prevent
       // Segmentation Faults when trying to create a new document
@@ -1184,8 +1184,8 @@ namespace netgen
       reader.Transfer(step_doc);
 
       // Read in the shape(s) and the colours present in the STEP File
-      Handle_XCAFDoc_ShapeTool step_shape_contents = XCAFDoc_DocumentTool::ShapeTool(step_doc->Main());
-      Handle_XCAFDoc_ColorTool step_colour_contents = XCAFDoc_DocumentTool::ColorTool(step_doc->Main());
+      Handle(XCAFDoc_ShapeTool) step_shape_contents = XCAFDoc_DocumentTool::ShapeTool(step_doc->Main());
+      Handle(XCAFDoc_ColorTool) step_colour_contents = XCAFDoc_DocumentTool::ColorTool(step_doc->Main());
 
       TDF_LabelSequence step_shapes;
       step_shape_contents->GetShapes(step_shapes);
@@ -1238,7 +1238,7 @@ namespace netgen
       // Fixed a bug in the OpenCascade XDE Colour handling when 
       // opening BREP Files, since BREP Files have no colour data.
       // Hence, the face_colours Handle needs to be created as a NULL handle.
-      occgeo->face_colours = Handle_XCAFDoc_ColorTool();
+      occgeo->face_colours = Handle(XCAFDoc_ColorTool)();
       occgeo->face_colours.Nullify();
       occgeo->changed = 1;
       occgeo->BuildFMap();
