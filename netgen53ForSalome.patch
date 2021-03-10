@@ -50,18 +50,7 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgenmesh.cpp netgen-5.3.1_SRC_modi
        }
  
        if (h < maxside && depth < 10)
-@@ -250,8 +250,8 @@
-       hvalue[0] = 0;
-       pnt = c->Value(s0);
- 
--      double olddist = 0;
--      double dist = 0;
-+      //double olddist = 0; -- useless variables
-+      //double dist = 0;
- 
-       int tmpVal = (int)(DIVIDEEDGESECTIONS);
- 
-@@ -259,15 +259,19 @@
+@@ -259,9 +259,13 @@
        {
           oldpnt = pnt;
           pnt = c->Value(s0+(i/double(DIVIDEEDGESECTIONS))*(s1-s0));
@@ -76,14 +65,6 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgenmesh.cpp netgen-5.3.1_SRC_modi
  
           //(*testout) << "mesh.GetH(Point3d(pnt.X(), pnt.Y(), pnt.Z())) " << mesh.GetH(Point3d(pnt.X(), pnt.Y(), pnt.Z()))
           //	   <<  " pnt.Distance(oldpnt) " << pnt.Distance(oldpnt) << endl;
- 
--         olddist = dist;
--         dist = pnt.Distance(oldpnt);
-+         //olddist = dist; -- useless variables
-+         //dist = pnt.Distance(oldpnt);
-       }
- 
-       //  nsubedges = int(ceil(hvalue[DIVIDEEDGESECTIONS]));
 @@ -282,7 +286,10 @@
        {
           if (hvalue[i1]/hvalue[DIVIDEEDGESECTIONS]*nsubedges >= i)
