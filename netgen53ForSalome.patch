@@ -511,11 +511,6 @@ diff -Naur netgen-5.3.1_SRC_orig/libsrc/occ/occgeom.hpp netgen-5.3.1_SRC_modif/l
  #include "ShapeUpgrade_ShellSewing.hxx"
  #include "ShapeFix_Shape.hxx"
  #include "ShapeFix_Wireframe.hxx"
-+#include <Standard_Version.hxx>
-+#if (OCC_VERSION_MAJOR << 16 | OCC_VERSION_MINOR << 8 | OCC_VERSION_MAINTENANCE) <= 0x060702
-+// porting to OCCT6.7.3
- #include "BRepMesh.hxx"
-+#endif
  #include "BRepMesh_IncrementalMesh.hxx"
  #include "BRepBndLib.hxx"
  #include "Bnd_Box.hxx"
