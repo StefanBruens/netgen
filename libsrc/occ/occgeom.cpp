@@ -1203,11 +1203,13 @@ namespace netgen
     Point<3> hp = p;
     if (FastProject (surfind, hp, u, v))
       {
+	gi.u = u;
+	gi.v = v;
 	p = hp;
 	return 1;
       }
-    ProjectPoint (surfind, p);
-    return CalcPointGeomInfo (surfind, gi, p);
+    gi = ProjectPoint (surfind, p);
+    return true;
   }
 
   void OCCGeometry :: ProjectPointEdge(int surfind, INDEX surfind2,
@@ -1407,11 +1409,12 @@ namespace netgen
 	  {
             //  cout << "Fast projection to surface fails! Using OCC projection" << endl;
             hnewp = savept;
-	    ProjectPoint(surfi, hnewp);
-	  }
-	newgi.trignum = 1;
-        newgi.u = u;
-        newgi.v = v;
+            newgi = ProjectPoint(surfi, hnewp);
+          } else {
+            newgi.trignum = 1;
+            newgi.u = u;
+            newgi.v = v;
+          }
       }
     newp = hnewp;
   }
