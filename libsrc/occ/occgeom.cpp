@@ -1358,35 +1358,8 @@ namespace netgen
 
   bool OCCGeometry :: CalcPointGeomInfo(int surfind, PointGeomInfo& gi, const Point<3> & p) const
   {
-    Standard_Real u,v;
-
-    gp_Pnt pnt(p(0), p(1), p(2));
-
-    Handle(Geom_Surface) occface;
-    occface = BRep_Tool::Surface(TopoDS::Face(fmap(surfind)));
-
-    /*
-    GeomAPI_ProjectPointOnSurf proj(pnt, occface);
-
-    if (proj.NbPoints() < 1)
-      {
-	cout << "ERROR: OCCSurface :: GetNormalVector: GeomAPI_ProjectPointOnSurf failed!"
-	     << endl;
-	cout << p << endl;
-	return 0;
-      }
- 
-    proj.LowerDistanceParameters (u, v);  
-    */
-
-    Handle( ShapeAnalysis_Surface ) su = new ShapeAnalysis_Surface( occface );
-    gp_Pnt2d suval = su->ValueOfUV ( pnt, BRep_Tool::Tolerance( TopoDS::Face(fmap(surfind)) ) );
-    suval.Coord( u, v);
-    //pnt = occface->Value( u, v );
-    
-
-    gi.u = u;
-    gi.v = v;
+    auto pnt = p;
+    gi = ProjectPoint(surfind, pnt);
     return true;
   }
 
